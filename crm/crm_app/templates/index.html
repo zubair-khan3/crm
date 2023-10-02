@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        
+    {% if user.is_authenticated %}
+        <h1>Hello .. {{ user }}, if you are seeing this which means you have logged in</h1>
+    {% else  %}
+        <h2>You are not logged it, please click here to login <a href="{% url 'user_login' %}">Login</a>
+    {% endif %}
+
+
+    
+    {% endblock %}
