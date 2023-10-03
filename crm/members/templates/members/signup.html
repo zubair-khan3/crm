@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if form.errors %}
+        
+        {{errors}}
+    {% endif %}
+
+    <div class="container">
+        <h4>Signup Page </h4>
+        <form action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br><br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    
+
+    {% endblock content %}
+
