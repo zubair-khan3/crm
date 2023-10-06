@@ -1,13 +1,49 @@
 {% extends 'base.html' %}
 
-    {% block content %}
-        
+{% block content %}
+    
     {% if user.is_authenticated %}
-        <h1>Hello .. {{ user }}, if you are seeing this which means you have logged in</h1>
+        <div class="container">    
+            <h5>Hello, {{ user }},if you are seeing this which means you have logged in.</h5>
+            <hr>
+        </div>
+        {% if record %}
+            <div class="container">
+                <table class="table table-hover table-bordered">
+                    <thead class=''>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    {% for records in record %}
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{records.id}}</th>
+                            <td> <a href="{% url 'single_record' records.id %}">{{records.first_name}}</a> </td>
+                            <td>{{ records.last_name}}</td>
+                            <td>{{records.email}}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>    
+        {% endif %}
+    
     {% else  %}
-        <h2>You are not logged it, please click here to login <a href="{% url 'user_login' %}">Login</a>
+        <div class="container">
+            <h6>You are not logged it, please click here to login <a href="{% url 'user_login' %}">Login</a></h6>
+        </div>
+       
     {% endif %}
 
 
-    
-    {% endblock %}
+{% endblock %}
+
+
+
+<table class="table t">
+  ...
+</table>

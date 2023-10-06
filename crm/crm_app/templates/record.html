@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Record
+            </div>
+            {% if customer_record %}
+            <div class="card-body">
+                <h5 class="card-title">{{customer_record.first_name | capfirst}} {{customer_record.last_name | capfirst}}</h5>
+                
+                <ul  class="list-unstyled">
+                    <li><strong>Email:</strong>&ensp; {{customer_record.email}}</li>
+                    <li><strong>Phone:</strong>&ensp;{{customer_record.phone}}</li>
+                    <li><strong>City:</strong>&ensp;{{customer_record.city}}</li>
+                    <li><strong>Address:</strong>&ensp;{{customer_record.address}}</li>
+                    <li><strong>Zip:</strong>&ensp;{{customer_record.zip_code}}</li>
+                </ul>
+                
+                <a href="#" class="btn btn-primary">Edit</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+&ensp;

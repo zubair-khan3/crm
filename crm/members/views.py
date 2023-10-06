@@ -40,6 +40,4 @@ def signup(request):
             login(request, user)
             messages.success(request,"Your account has been created successfully")
             return redirect('index')
-        
-        
     return render(request,'members/signup.html', {'form': form})
