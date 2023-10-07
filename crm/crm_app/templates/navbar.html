@@ -16,8 +16,16 @@
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item" >
+          <a class="nav-link" href="{% url 'user_profile' user.id %}" >{{user |capfirst}}</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" href="{% url 'add_record'  %}" >Add Record</a>
+        </li>
+
+        <li class="nav-item" >
           <a class="nav-link" href="{% url 'user_logout' %}" >logout</a>
         </li>
+        
         {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'user_login' %}">login</a>

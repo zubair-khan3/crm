@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{{user}}, {{customer_record.created_by}}
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -16,13 +17,37 @@
                     <li><strong>City:</strong>&ensp;{{customer_record.city}}</li>
                     <li><strong>Address:</strong>&ensp;{{customer_record.address}}</li>
                     <li><strong>Zip:</strong>&ensp;{{customer_record.zip_code}}</li>
+                    {{customer_record.created_on}}
                 </ul>
+                {% if user.is_authenticated %}
+                    {% if user_str == customer_record.created_by %}
+                        <a href="{% url 'update_record' customer_record.id   %}" class="btn btn-outline-primary btn-sm ">Update</a>&ensp;&ensp;
+                        <a href="{% url 'confirm_delete' customer_record.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+                        
+                    {% else %}
+                        <p>you cant edit or delete</p>
+                    {% endif %}
+                {% endif %}
                 
-                <a href="#" class="btn btn-primary">Edit</a>
             </div>
             {% endif %}
         </div>
     </div>
+    <script>
+         function myFunction() 
+            {
+                var txt;
+                if (confirm("Are you sure!")) {
+                    txt = "You pressed OK!";
+                     
+                } 
+                else {
+                    txt = "You pressed Cancel!";
+                }
+                document.getElementById("demo").innerHTML = txt;
+            }
+    </script>
+
 {% endblock %}
 
 &ensp;

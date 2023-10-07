@@ -4,7 +4,7 @@
     
     {% if user.is_authenticated %}
         <div class="container">    
-            <h5>Hello, {{ user }},if you are seeing this which means you have logged in.</h5>
+            <h5>Hello,{{ user | capfirst}}</h5>
             <hr>
         </div>
         {% if record %}
