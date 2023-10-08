@@ -2,13 +2,21 @@ from django.shortcuts import render,redirect
 from .models import Record
 from django.contrib import messages
 from .forms import AddRecord
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
         record = Record.objects.all()
-        return render(request, 'index.html',{'record': record})
+        
+        paginator = Paginator(Record.objects.all(), 5)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        
+        total_pages = page_obj.paginator.num_pages
+        print(total_pages)
+
+        return render(request, 'index.html',{'record': record, 'page_obj': page_obj, 'total_pages':range(1,total_pages +1)})
     else:
         messages.success(request, "You need to login")
         return render(request,'index.html')
@@ -22,7 +30,7 @@ def single_record(request,pk):
         print("user type" , request.user,type(user_str))
         
         print("user type",type(customer_record.created_by))
-        return render(request, 'record.html', {'customer_record':customer_record, 'user_str':user_str})
+        return render(request, 'single_record.html', {'customer_record':customer_record, 'user_str':user_str})
     else:
         messages.success(request, "You need to login")
         return render(request,'index.html')
@@ -80,3 +88,14 @@ def update_record(request,pk):
 
 
     return render(request,'update_record.html')
+
+def search(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            searched = request.POST['search']
+            searched_date = Record.objects.filter(first_name__icontains =searched)
+
+            return render(request,'search.html',{'searched':searched,'searched_data':searched_date})
+    else:
+        messages.success(request,"you need to login")
+        return render(request,'index.html')

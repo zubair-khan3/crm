@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class='container'>
+        <p><b>Search Result:</b></P>
+        <hr>
+        {% if searched_data %}    
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">City</th>
+                </tr>
+            </thead>
+            {% for search in searched_data %}
+            <tbody>
+                <tr>
+                    
+                    <td><a href="{% url 'single_record' search.id %}">{{search.first_name}}</a></td>
+                    <td>{{search.last_name}}</td>
+                    <td>{{search.city}}</td>
+                </tr>
+            </tbody>
+            {% endfor %} 
+        </table>
+        {% else %}
+            <p> No Result</p>
+        {% endif %}
+    
+    </div>
+{% endblock content %}
+    
